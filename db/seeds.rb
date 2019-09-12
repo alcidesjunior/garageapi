@@ -13,7 +13,7 @@ user = User.new(user_params)
 if user.save
   puts "USER created!"
 else
-  puts "cagou #{user.errors.full_messages}"
+  puts "Error => #{user.errors.full_messages}"
 end
 
 # #address
