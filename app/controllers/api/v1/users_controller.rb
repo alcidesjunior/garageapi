@@ -16,6 +16,12 @@ module Api
         render json: {current_user: current_user}
       end
 
+      def show
+        @user = User.find(params[:id])
+        @garages = @user.garages.as_json(:include => :address)
+        render json: {user: @user.as_json(:include => :addresses), garages: @garages}#, address: @user_address, garages: @garages}
+      end
+
       def create
         user = User.new(user_params)
         if user.save
@@ -26,8 +32,9 @@ module Api
         puts "=======chamando"
       end
       private
+
       def user_params
-        params.require(:user).permit(:name,:email,:document_type,:document_number,:password,:role)
+        params.require(:user).permit(:name,:email,:document_type,:document_number,:password,:role, :isActive)
       end
     end
   end

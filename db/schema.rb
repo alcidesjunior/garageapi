@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_141234) do
     t.string "document_number"
     t.string "password_digest"
     t.string "role", default: "user", null: false
+    t.boolean "isActive", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
