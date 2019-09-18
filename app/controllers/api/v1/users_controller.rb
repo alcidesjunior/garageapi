@@ -18,7 +18,9 @@ module Api
 
       def show
         @user = User.find(params[:id])
-        @garages = @user.garages.as_json(:include => :address)
+        # @commentsAverage = @user.garages.c
+        @garages = @user.garages.as_json(:include => [:address, :comments])
+        @garages[0][:teste] = "valor"
         render json: {user: @user.as_json(:include => :addresses), garages: @garages}#, address: @user_address, garages: @garages}
       end
 
@@ -35,6 +37,9 @@ module Api
 
       def user_params
         params.require(:user).permit(:name,:email,:document_type,:document_number,:password,:role, :isActive)
+      end
+
+      def comment_average
       end
     end
   end

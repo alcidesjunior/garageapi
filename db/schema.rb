@@ -31,16 +31,17 @@ ActiveRecord::Schema.define(version: 2019_09_10_141234) do
   end
 
   create_table "comments", force: :cascade do |t|
+    t.string "title"
     t.string "message"
-    t.bigint "from_user_id_id"
-    t.bigint "to_user_id_id"
+    t.bigint "from_user_id"
+    t.bigint "to_user_id"
     t.float "rating"
     t.bigint "garage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["from_user_id_id"], name: "index_comments_on_from_user_id_id"
+    t.index ["from_user_id"], name: "index_comments_on_from_user_id"
     t.index ["garage_id"], name: "index_comments_on_garage_id"
-    t.index ["to_user_id_id"], name: "index_comments_on_to_user_id_id"
+    t.index ["to_user_id"], name: "index_comments_on_to_user_id"
   end
 
   create_table "garages", force: :cascade do |t|
