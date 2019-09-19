@@ -35,6 +35,7 @@ if user.save
     comment = Comment.new(localcoment)
 
     cmt = {:from_user_id=>1,:to_user_id=>1,:garage_id=>1,:title=>"Really bad :/",:message=>"I dont like...bad service...",:rating=>1 }
+    cmt = {:from_user_id=>1,:to_user_id=>1,:garage_id=>1,:title=>"I like of the service",:message=>"I dont like...bad service...",:rating=>2 }
     if comment.save
       puts "Comment was added"
     end

@@ -20,7 +20,20 @@ module Api
         @user = User.find(params[:id])
         # @commentsAverage = @user.garages.c
         @garages = @user.garages.as_json(:include => [:address, :comments])
-        @garages[0][:teste] = "valor"
+
+        _acumulateRate = 0
+
+        @garages.each do |g|
+          if g["comments"] != nil
+            g["comments"].each do |c|
+              _acumulateRate += c["rating"]
+            end
+            g[:average] = ((_acumulateRate/g["comments"].count).to_f).round(2)
+
+            _acumulateRate = 0
+          end
+        end
+
         render json: {user: @user.as_json(:include => :addresses), garages: @garages}#, address: @user_address, garages: @garages}
       end
 

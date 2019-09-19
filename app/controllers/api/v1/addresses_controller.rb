@@ -31,7 +31,7 @@ module Api
 
       def destroy
         @address.destroy
-        render json: notice: 'Adress was deleted with successfully.'
+        render json: {notice: 'Adress was deleted with successfully.'}
       end
 
       private
