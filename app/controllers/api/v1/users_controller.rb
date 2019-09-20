@@ -5,10 +5,8 @@ module Api
       before_action :authorize_as_admin, only: [:destroy]
       before_action :authorize, only: [:update]
 
-  #https://medium.com/@ciphitech/token-based-authentication-api-in-rails-with-the-help-of-jwt-and-knock-5715bc766936
       def index
           render json: { users: User.all.as_json(:except =>[:password_digest]) }
-        # render json: {status: 200, msg: "Logged! as #{current_user.name}"}
       end
 
       def current
@@ -18,7 +16,6 @@ module Api
 
       def show
         @user = User.find(params[:id])
-        # @commentsAverage = @user.garages.c
         @garages = @user.garages.as_json(:include => [:address, :comments])
 
         _acumulateRate = 0

@@ -7,7 +7,6 @@ class User < ApplicationRecord
   validates_presence_of :email
   validates_uniqueness_of :email
 
-  # belongs_to :comment
   has_many :addresses
   has_many :garages
   has_one :vehicle
