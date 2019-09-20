@@ -29,7 +29,6 @@ module Api
               _acumulateRate += c["rating"]
             end
             g[:average] = ((_acumulateRate/g["comments"].count).to_f).round(2)
-
             _acumulateRate = 0
           end
         end

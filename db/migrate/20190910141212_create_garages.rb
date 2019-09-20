@@ -9,7 +9,6 @@ class CreateGarages < ActiveRecord::Migration[5.2]
       t.string :photo3
 
       t.belongs_to :user
-      # t.belongs_to :address
       t.timestamps
     end
   end
