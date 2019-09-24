@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_09_10_141234) do
   create_table "garages", force: :cascade do |t|
     t.string "description"
     t.integer "parking_spaces"
+    t.integer "busy_space", default: 0
     t.float "price"
     t.string "photo1"
     t.string "photo2"
