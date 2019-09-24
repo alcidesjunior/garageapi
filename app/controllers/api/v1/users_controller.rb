@@ -4,6 +4,7 @@ module Api
       before_action :authenticate_user, only: [:index,:current, :update, :logout]
       before_action :authorize_as_admin, only: [:destroy]
       before_action :authorize, only: [:update]
+      before_action :set_user, only: [:show]
 
       def index
           render json: { users: User.all.as_json(:except =>[:password_digest]) }
@@ -15,7 +16,6 @@ module Api
       end
 
       def show
-        @user = User.find(params[:id])
         @garages = @user.garages.as_json(:include => [:address, :comments])
 
         _acumulateRate = 0
@@ -45,10 +45,11 @@ module Api
       private
 
       def user_params
-        params.require(:user).permit(:name,:email,:document_type,:document_number,:password,:role, :isActive)
+        params.require(:user).permit(:name,:email,:document_type,:document_number,:password,:role,:busy_space, :isActive)
       end
 
-      def comment_average
+      def set_user
+        @user = User.find(params[:id])
       end
     end
   end

@@ -7,7 +7,7 @@ Knock.setup do |config|
   ## last forever.
   ##
   ## Default:
-  config.token_lifetime = 30.minutes
+  config.token_lifetime = 1.month
 
 
   ## Audience claim
