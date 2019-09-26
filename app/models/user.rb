@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :addresses
   has_many :garages
   has_one :vehicle
+  has_one :parking
 
 
   def can_mofidy_user?(user_id)

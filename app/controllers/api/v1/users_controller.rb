@@ -16,7 +16,7 @@ module Api
       end
 
       def show
-        @garages = @user.garages.as_json(:include => [:address, :comments])
+        @garages = @user.garages.as_json(:include => [:address, :comments, :parking])
 
         _acumulateRate = 0
 

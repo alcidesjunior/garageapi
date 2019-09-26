@@ -60,8 +60,24 @@ if user.save
     address.garage_id = garage.id
     address.save
 
-    #second garage
+    mock_veh = {model: "Honda Civic", chassi: "127836123AS87", license_plate: "hvu-2020", year: 2010, driver_license: "1238338383VU",user_id: 1}
+    veh = Vehicle.new(mock_veh)
+    if veh.save
+      puts "Vehicle was created!"
+      parking = {garage_owner_id: 1, driver_id: 1, price: 0.0, license_plate: "huv-2020",garage_id: garage.id, vehicle_id: veh.id, start: DateTime.now}
+      park = Parking.new(parking)
+      if park.save
+        puts "Parking was created!"
+      else
+        puts "Error when try add Parking"
+        puts "#{park.errors.full_messages}"
+      end
+    else
+      puts "Error when try add vehicle"
+      puts "#{veh.errors.full_messages}"
+    end
 
+    #second garage
 
     localcoment = {:from_user_id=>1,:to_user_id=>1,:garage_id=>garage.id,:title=>"Crazy",:message=>"nunca mais que eu volto.",:rating=>2 }
     comment = Comment.new(localcoment)

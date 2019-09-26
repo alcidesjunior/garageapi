@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_141234) do
+ActiveRecord::Schema.define(version: 2019_09_24_144414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,23 @@ ActiveRecord::Schema.define(version: 2019_09_10_141234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_garages_on_user_id"
+  end
+
+  create_table "parkings", force: :cascade do |t|
+    t.integer "garage_owner_id"
+    t.integer "driver_id"
+    t.float "price"
+    t.string "license_plate"
+    t.bigint "user_id"
+    t.bigint "vehicle_id"
+    t.bigint "garage_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["garage_id"], name: "index_parkings_on_garage_id"
+    t.index ["user_id"], name: "index_parkings_on_user_id"
+    t.index ["vehicle_id"], name: "index_parkings_on_vehicle_id"
   end
 
   create_table "users", force: :cascade do |t|
