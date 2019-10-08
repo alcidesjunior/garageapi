@@ -16,21 +16,25 @@ module Api
       end
 
       def show
-        @garages = @user.garages.as_json(:include => [:address, :comments, :parking])
+        # @garages = @user.garages.as_json(:include => [:address])#, :comments, :parking])
 
-        _acumulateRate = 0
-
-        @garages.each do |g|
-          if g["comments"] != nil
-            g["comments"].each do |c|
-              _acumulateRate += c["rating"]
-            end
-            g[:average] = ((_acumulateRate/g["comments"].count).to_f).round(2)
-            _acumulateRate = 0
-          end
+        # _acumulateRate = 0
+        #
+        # @garages.each do |g|
+        #   if g["comments"] != nil
+        #     g["comments"].each do |c|
+        #       _acumulateRate += c["rating"]
+        #     end
+        #     g[:average] = ((_acumulateRate/g["comments"].count).to_f).round(2)
+        #     _acumulateRate = 0
+        #   end
+        # end
+        puts
+        if @user.role == "ROLE_GD"
+          render json: {user: @user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}#, garages: @garages}#, address: @user_address, garages: @garages}
+        else
+          render json: {user: @user.as_json(:include => [:addresses],:except =>[:password_digest])}
         end
-
-        render json: {user: @user.as_json(:include => :addresses), garages: @garages}#, address: @user_address, garages: @garages}
       end
 
       def create
@@ -45,7 +49,7 @@ module Api
       private
 
       def user_params
-        params.require(:user).permit(:name,:email,:document_type,:document_number,:password,:role,:busy_space, :isActive)
+        params.require(:user).permit(:name,:email,:document_type,:document_number,:password,:role,:busy_space, :isActive, :lat, :long)
       end
 
       def set_user

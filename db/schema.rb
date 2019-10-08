@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2019_09_24_144414) do
     t.string "complement"
     t.string "city"
     t.string "uf"
+    t.string "lat", default: "0"
+    t.string "long", default: "0"
     t.bigint "user_id"
     t.bigint "garage_id"
     t.datetime "created_at", null: false
@@ -81,7 +83,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_144414) do
     t.string "document_type", default: "cpf", null: false
     t.string "document_number"
     t.string "password_digest"
-    t.string "role", default: "user", null: false
+    t.string "role", default: "ROLE_GD", null: false
     t.boolean "isActive", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -5,7 +5,7 @@ module Api
       before_action :set_garage, only:[:show,:update,:destroy]
 
       def index
-        render json: { garage: Garage.all.as_json }
+        render json: { garage: Garage.all.as_json(:include=>[:address]) }
       end
 
       def show
@@ -16,21 +16,21 @@ module Api
         @garage = Garage.new(garage_params)
 
         if @garage.save
-          render json:  @garage, status: :created, notice: 'Garage was successfully created.'
+          render json: { result: @garage, status: :created, notice: 'Garage was successfully created.'}
         else
-          render json:  @garage.errors, status: :unprocessable_entity
+          render json:  {result: @garage.errors, status: :unprocessable_entity}
         end
       end
 
       def update
         @garage = Address.find(params[:id])
         @garage.save
-        render json: @garage, status: :updated, notice: 'Garage was updated with successfully.'
+        render json: {result: @garage, status: :updated, notice: 'Garage was updated with successfully.'}
       end
 
       def destroy
         @garage.destroy
-        render json: notice: 'Garage was deleted with successfully.'
+        render json: {notice: 'Garage was deleted with successfully.'}
       end
 
       private
