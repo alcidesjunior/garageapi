@@ -5,11 +5,14 @@ module Api
       before_action :set_garage, only:[:show,:update,:destroy]
 
       def index
-        render json: { garage: Garage.all.as_json(:include=>[:address]) }
+
+        @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
+        render json: {garages: @garages}
+
       end
 
       def show
-        render json: @garage
+        render json: {garage: @garage.as_json(:include=> [:address,:comments])}
       end
 
       def create

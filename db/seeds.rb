@@ -59,6 +59,9 @@ if user.save
       parking = {garage_owner_id: 1, driver_id: 1, price: 0.0, license_plate: "huv-2020",garage_id: garage.id, vehicle_id: veh.id, start: DateTime.now}
       park = Parking.new(parking)
       if park.save
+        garage = Garage.find(garage.id)
+        garage.busy_space = (garage.busy_space) + 1
+        garage.save
         puts "Parking was created!"
       else
         puts "Error when try add Parking"
