@@ -6,7 +6,7 @@ module Api
 
       def index
         @addresses = Address.all
-        render json: @addresses
+        render json: {addresses: @addresses}
       end
 
       def show
@@ -24,7 +24,7 @@ module Api
       end
 
       def update
-        @address = Address.find(params[:id])
+        @address = Address.update(params[:id], address_params)#Address.find(params[:id])
         @address.save
         render json: @address, status: :updated, notice: 'Address was updated with successfully.'
       end
@@ -41,7 +41,7 @@ module Api
         end
 
         def address_params
-          params.require(:address).permit(:zip, :street, :number, :complement,:user_id,:garage_id)
+          params.require(:address).permit(:zip, :street, :number,:city,:uf,:complement,:user_id,:garage_id)
         end
     end
   end

@@ -16,9 +16,15 @@ module Api
       end
 
       def create
-        @garage = Garage.new(garage_params)
+        address_id = garage_params["address_id"]
+        puts "AQUI>>>>>>>>>>>>#{address_id}"
+        @garage = Garage.new(garage_params.except(:address_id))
 
         if @garage.save
+          #associating garage to address
+          address = Address.find(address_id)
+          address.garage_id = @garage.id
+          address.save
           render json: { result: @garage, status: :created, notice: 'Garage was successfully created.'}
         else
           render json:  {result: @garage.errors, status: :unprocessable_entity}
@@ -40,7 +46,7 @@ module Api
 
       def garage_params
         params.require(:garage).permit(:description, :parking_spaces, :price,
-        :photo1,:photo2,:photo3,:address_id)
+        :photo1,:photo2,:photo3,:address_id,:user_id)
       end
 
       def set_garage
