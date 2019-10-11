@@ -1,7 +1,7 @@
 module Api
   module V1
     class ParkingsController < ApplicationController
-
+      before_action :authenticate_user, only: [:index,:create,:show,:current, :update, :logout]
       before_action :set_parking, only:[:show,:update,:destroy]
 
       def create
@@ -26,7 +26,7 @@ module Api
 
       def show
         if @parking
-          render json: {parking: @parking}
+          render json: {result: @parking}
         else
           render json: {result: "Parking was not found."}
         end

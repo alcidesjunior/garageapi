@@ -12,7 +12,7 @@ module Api
       end
 
       def show
-        render json: {garage: @garage.as_json(:include=> [:address,:comments])}
+        render json: {result: @garage.as_json(:include=> [:address,:comments])}
       end
 
       def create
@@ -25,7 +25,7 @@ module Api
           address = Address.find(address_id)
           address.garage_id = @garage.id
           address.save
-          render json: { result: @garage, status: :created, notice: 'Garage was successfully created.'}
+          render json: {result: @garage, status: :created, notice: 'Garage was successfully created.'}
         else
           render json:  {result: @garage.errors, status: :unprocessable_entity}
         end
@@ -39,7 +39,7 @@ module Api
 
       def destroy
         @garage.destroy
-        render json: {notice: 'Garage was deleted with successfully.'}
+        render json: {result: 'Garage was deleted with successfully.'}
       end
 
       private

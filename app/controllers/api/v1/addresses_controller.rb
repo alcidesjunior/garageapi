@@ -26,12 +26,12 @@ module Api
       def update
         @address = Address.update(params[:id], address_params)#Address.find(params[:id])
         @address.save
-        render json: @address, status: :updated, notice: 'Address was updated with successfully.'
+        render json: {result: @address, status: :updated, notice: 'Address was updated with successfully.'}
       end
 
       def destroy
         @address.destroy
-        render json: {notice: 'Adress was deleted with successfully.'}
+        render json: {result: 'Adress was deleted with successfully.'}
       end
 
       private
