@@ -40,7 +40,7 @@ module Api
       def create
         user = User.new(user_params)
         if user.save
-          render json: {result: user.except(:password) , message: 'User was created!'}
+          render json: {result: user.except(:password_digest) , message: 'User was created!'}
         end
       end
       def update
