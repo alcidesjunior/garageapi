@@ -6,20 +6,20 @@ module Api
 
       def index
         @addresses = Address.all
-        render json: {addresses: @addresses}
+        render json: {result: @addresses}
       end
 
       def show
-        render json:  @address
+        render json: {result: @address}
       end
 
       def create
         @address = Address.new(address_params)
 
         if @address.save
-          render json:  @address, status: :created, notice: 'Address was successfully created.'
+          render json: {result: @address, status: :created, notice: 'Address was successfully created.'}
         else
-          render json:  @address.errors, status: :unprocessable_entity
+          render json: {result: @address.errors, status: :unprocessable_entity}
         end
       end
 

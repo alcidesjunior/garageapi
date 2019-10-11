@@ -7,7 +7,7 @@ module Api
       def index
 
         @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
-        render json: {garages: @garages}
+        render json: {result: @garages}
 
       end
 
