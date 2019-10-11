@@ -41,6 +41,8 @@ module Api
         user = User.new(user_params)
         if user.save
           render json: {result: 'User was created!'}
+        else
+          render json: {result: "Error when try add user"}
         end
       end
       def update
