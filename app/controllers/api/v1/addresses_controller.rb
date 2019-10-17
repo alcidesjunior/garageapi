@@ -17,7 +17,7 @@ module Api
         @address = Address.new(address_params)
 
         if @address.save
-          render json: {result: @address, status: :created, notice: 'Address was successfully created.'}
+          render json: {result: @address}
         else
           render json: {result: @address.errors, status: :unprocessable_entity}
         end
