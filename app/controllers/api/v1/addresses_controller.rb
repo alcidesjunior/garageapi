@@ -6,7 +6,7 @@ module Api
 
       def index
         @addresses = Address.all
-        render json: {result: @addresses}
+        render json: {results: @addresses}
       end
 
       def show

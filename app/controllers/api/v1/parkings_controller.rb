@@ -14,7 +14,7 @@ module Api
                 garage.save
                 render json: { result: @parking, status: :created, notice: 'Parking was successfully created.'}
               else
-                render json:  {result: @parking.errors, status: :unprocessable_entity}
+                render json:  {result: @parking.errors}
               end
             else
               render json: {result: "Sorry, no vacancies."}

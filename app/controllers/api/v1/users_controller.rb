@@ -17,7 +17,7 @@ module Api
 
       def show
         # @garages = @user.garages.as_json(:include => [:address])#, :comments, :parking])
-
+        #algoritmo de rating
         # _acumulateRate = 0
         #
         # @garages.each do |g|

@@ -7,7 +7,7 @@ module Api
 
       def comments
         @comments = Comment.where(:garage_id=>params[:garage_id])
-        render json: {result: @comments}
+        render json: {results: @comments}
       end
 
       def show

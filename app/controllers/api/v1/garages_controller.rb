@@ -7,17 +7,27 @@ module Api
       def index
 
         @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
-        render json: {result: @garages}
+        render json: {results: @garages}
 
       end
 
       def show
-        render json: {result: @garage.as_json(:include=> [:address,:comments])}
+        garage = @garage.as_json(:include=> [:address,:comments])
+        _acumulateRate = 0
+
+         if garage["comments"] != nil
+           garage["comments"].each do |c|
+             _acumulateRate += c["rating"]
+           end
+           garage[:average] = ((_acumulateRate/g["comments"].count).to_f).round(2)
+           _acumulateRate = 0
+         end
+
+        render json: {result: garage}
       end
 
       def create
         address_id = garage_params["address_id"]
-        puts "AQUI>>>>>>>>>>>>#{address_id}"
         @garage = Garage.new(garage_params.except(:address_id))
 
         if @garage.save
@@ -25,7 +35,7 @@ module Api
           address = Address.find(address_id)
           address.garage_id = @garage.id
           address.save
-          render json: {result: @garage, status: :created, notice: 'Garage was successfully created.'}
+          render json: {result: @garage}
         else
           render json:  {result: @garage.errors, status: :unprocessable_entity}
         end
@@ -34,7 +44,7 @@ module Api
       def update
         @garage = Address.find(params[:id])
         @garage.save
-        render json: {result: @garage, status: :updated, notice: 'Garage was updated with successfully.'}
+        render json: {result: @garage}
       end
 
       def destroy
