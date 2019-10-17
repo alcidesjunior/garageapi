@@ -19,7 +19,7 @@ module Api
         if @address.save
           render json: {result: @address}
         else
-          render json: {result: @address.errors, status: :unprocessable_entity}
+          render json: {result: @address.errors}
         end
       end
 
