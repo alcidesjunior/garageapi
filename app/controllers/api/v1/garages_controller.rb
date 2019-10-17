@@ -19,7 +19,7 @@ module Api
            garage["comments"].each do |c|
              _acumulateRate += c["rating"]
            end
-           garage[:average] = ((_acumulateRate/g["comments"].count).to_f).round(2)
+           garage[:average] = ((_acumulateRate/garage["comments"].count).to_f).round(2)
            _acumulateRate = 0
          end
 
