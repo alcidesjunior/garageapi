@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :comments
       resources :parkings
       resources :garages
+      resources :vehicles
       get 'garageComments/:garage_id', to: 'comments#comments'
     end
   end
