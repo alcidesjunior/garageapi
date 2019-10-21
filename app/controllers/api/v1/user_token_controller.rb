@@ -7,6 +7,9 @@ module Api
       # def bad_request
       #   render json: { error: "Invalid email address/password" }, status: :bad_request
       # end
+      def index
+        render json: "Usuario x"
+      end
     end
   end
 end
