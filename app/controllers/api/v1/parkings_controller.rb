@@ -26,7 +26,7 @@ module Api
 
       def show
         if @parking
-          render json: {result: @parking}
+          render json: {result: @parking.as_json(:except =>[:user_id])}
         else
           render json: {result: "Parking was not found."}
         end
