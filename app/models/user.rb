@@ -20,4 +20,10 @@ class User < ApplicationRecord
   def is_admin
     role == 'admin'
   end
+
+  # def self.from_token_payload payload
+  #   puts "==============="
+  #   puts payload["sub"]
+  #   puts "==============="
+  # end
 end

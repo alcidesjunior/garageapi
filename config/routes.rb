@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'user_token' => 'user_token#create'
       resources :users
+      post 'current_user' => 'users#current_user'
       resources :addresses
       resources :comments
       resources :parkings
