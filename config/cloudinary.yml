@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: garagefinder
+  api_key: '763732272732132'
+  api_secret: MqpxHmxid-Xe90OqL971eTpBYxg
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: garagefinder
+  api_key: '763732272732132'
+  api_secret: MqpxHmxid-Xe90OqL971eTpBYxg
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: garagefinder
+  api_key: '763732272732132'
+  api_secret: MqpxHmxid-Xe90OqL971eTpBYxg
+  enhance_image_tag: true
+  static_file_support: false
