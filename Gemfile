@@ -19,6 +19,7 @@ gem 'bcrypt'
 gem 'active_model_serializers'
 gem 'knock'
 gem 'jwt'
+gem 'cloudinary'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

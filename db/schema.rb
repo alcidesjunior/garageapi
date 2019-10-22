@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2019_09_24_144414) do
     t.string "complement"
     t.string "city"
     t.string "uf"
-    t.string "lat", default: "0"
-    t.string "long", default: "0"
+    t.decimal "lat", default: "0.0"
+    t.decimal "long", default: "0.0"
     t.bigint "user_id"
     t.bigint "garage_id"
     t.datetime "created_at", null: false
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 2019_09_24_144414) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "title"
-    t.string "message"
+    t.string "title", default: ""
+    t.string "message", default: ""
     t.bigint "from_user_id"
     t.bigint "to_user_id"
     t.float "rating"
