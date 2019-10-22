@@ -12,7 +12,7 @@ module Api
               if @parking.save
                 garage.busy_space = garage.busy_space + 1
                 garage.save
-                render json: { result: @parking, status: :created, notice: 'Parking was successfully created.'}
+                render json: { result: @parking.as_json(:except =>[:user_id])}
               else
                 render json:  {result: @parking.errors}
               end
