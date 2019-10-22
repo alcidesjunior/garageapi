@@ -10,9 +10,9 @@ module Api
           render json: { result: User.all.as_json(:except =>[:password_digest]) }
       end
 
-      def current_user
-        current_user.update!(last_login: Time.now)
-        render json: {result: current_user}
+      def current
+        # current_user.update!(last_login: Time.now)
+        render json: {result: current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}
       end
 
       def show
