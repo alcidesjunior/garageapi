@@ -1,7 +1,7 @@
 module Api
   module V1
     class CommentsController < ApplicationController
-      before_action :authenticate_user, only: [:index,:comments,:current, :update, :logout]
+      before_action :authorize_request, except: [:comments]
       before_action :set_comment, only: [:update,:show,:destroy]
 
 

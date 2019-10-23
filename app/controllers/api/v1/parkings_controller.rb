@@ -33,7 +33,7 @@ module Api
       end
 
       def update
-        @parking = Parking.update(parking_params,params[:id])
+        @parking = Parking.update(params[:id],parking_paramsß)
         render json: {result: @parking}
       end
 

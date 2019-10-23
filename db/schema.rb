@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(version: 2019_09_24_144414) do
     t.integer "parking_spaces"
     t.integer "busy_space", default: 0
     t.float "price"
-    t.string "photo1"
-    t.string "photo2"
-    t.string "photo3"
+    t.text "photo1"
+    t.text "photo2"
+    t.text "photo3"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

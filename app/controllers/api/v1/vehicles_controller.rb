@@ -1,7 +1,7 @@
 module Api
   module V1
     class VehiclesController < ApplicationController
-      before_action :authenticate_user, only: [:index,:current, :update, :logout]
+      before_action :authorize_request
       before_action :authorize_as_admin, only: [:destroy]
       before_action :authorize, only: [:update]
       before_action :set_vehicle, only: [:show]
