@@ -15,7 +15,12 @@ module Api
         # if !@current_user
         #   puts "xiiiiiii"
         # end
-        render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}
+        if @user.role == "ROLE_GD"
+          render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}#, garages: @garages}#, address: @user_address, garages: @garages}
+        else
+          render json: {result: @current_user.as_json(:include => [:addresses],:except =>[:password_digest])}
+        end
+        # render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}
       end
 
       def show
@@ -32,7 +37,7 @@ module Api
         #     _acumulateRate = 0
         #   end
         # end
-        puts
+
         if @user.role == "ROLE_GD"
           render json: {result: @user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
