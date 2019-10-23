@@ -5,6 +5,9 @@ module Api
       before_action :set_parking, only:[:show,:update,:destroy]
 
       def create
+        puts "================="
+        puts parking_params["garage_id"]
+        puts "-================"
           if garage =  Garage.find_by_id(parking_params["garage_id"])
             #ensuring you have a vacancy available
             if garage.busy_space < garage.parking_spaces
@@ -33,7 +36,10 @@ module Api
       end
 
       def update
-        @parking = Parking.update(parking_params,params[:id])
+        puts "========"
+        puts params[:id]
+        puts "========"
+        @parking = Parking.update(params[:id],parking_params)
         render json: {result: @parking}
       end
 
