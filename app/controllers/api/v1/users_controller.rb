@@ -15,7 +15,7 @@ module Api
         # if !@current_user
         #   puts "xiiiiiii"
         # end
-        if @user.role == "ROLE_GD"
+        if @current_user.role == "ROLE_GD"
           render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
           render json: {result: @current_user.as_json(:include => [:addresses],:except =>[:password_digest])}
@@ -42,6 +42,14 @@ module Api
           render json: {result: @user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
           render json: {result: @user.as_json(:include => [:addresses],:except =>[:password_digest])}
+        end
+      end
+
+      def user_parkings
+        if @current_user.role == "ROLE_GD"
+          render json: {result: @current_user.as_json(:include => [:addresses,:vehicle,:parking],:except =>[:password_digest])}
+        else
+          render json: {notice: "This is not a driver"}
         end
       end
 

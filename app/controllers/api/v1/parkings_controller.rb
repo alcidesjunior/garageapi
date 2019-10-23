@@ -1,9 +1,30 @@
 module Api
   module V1
     class ParkingsController < ApplicationController
-      before_action :authenticate_user, only: [:index,:create,:show,:current, :update, :logout]
+      before_action :authorize_request
       before_action :set_parking, only:[:show,:update,:destroy]
 
+      def index
+        @parking = Parking.all
+        render json: {result: @parking}
+      end
+
+      def user_parking
+        _filter = params[:show]
+        _filter = "all" if _filter.nil?
+        if @current_user.role == "ROLE_GD"
+          if _filter == "current"
+            parking = Parking.find_by(:user_id=> @current_user.id, :end=>nil)
+            render json: {result: parking}
+          elsif _filter == "all"
+            parking = Parking.where(:user_id=> @current_user.id)
+            
+            render json: {results: parking}
+          end
+        else
+          render json: {notice: "This is not a driver"}
+        end
+      end
       def create
         puts "================="
         puts parking_params["garage_id"]
@@ -37,7 +58,12 @@ module Api
 
       def update
 
-        @parking = Parking.update(params[:id],parking_paramsß)
+        @parking = Parking.update(params[:id],parking_params)
+        garage = Garage.find_by(:id=>@parking.garage_id)
+        if garage.busy_space > 0
+          garage.busy_space = (garage.busy_space - 1)
+          garage.save
+        end
         render json: {result: @parking}
       end
 

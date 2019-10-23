@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       # post 'user_token' => 'user_token#create'
       resources :users
+      get 'user_parking' => 'parkings#user_parking'
       get 'current_user' => 'users#current'
       resources :addresses
       resources :comments
