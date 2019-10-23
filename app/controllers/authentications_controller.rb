@@ -10,7 +10,7 @@ class AuthenticationsController < ApplicationController
       render json: {result: {token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
                      user_id: @user.id }}
     else
-      render json: { error: 'User invalid' }, status: :unauthorized
+      render json: { notice: 'User invalid' }, status: :unauthorized
     end
   end
 

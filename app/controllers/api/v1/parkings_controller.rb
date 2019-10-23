@@ -20,10 +20,10 @@ module Api
                 render json:  {result: @parking.errors}
               end
             else
-              render json: {result: "Sorry, no vacancies."}
+              render json: {notice: "Sorry, no vacancies."}
             end
           else
-            render json: {result: "Error when try parking: Garage not found."}
+            render json: {notice: "Error when try parking: Garage not found."}
           end
       end
 
