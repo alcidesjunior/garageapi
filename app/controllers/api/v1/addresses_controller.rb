@@ -1,8 +1,8 @@
 module Api
   module V1
     class AddressesController < ApplicationController
-      before_action :authenticate_user, only: [:index, :show,:create, :update, :destroy]
-      before_action :set_addres , only: [:show, :update, :destroy]
+      before_action :authorize_request
+      before_action :set_address , only: [:show, :update, :destroy]
 
       def index
         @addresses = Address.all

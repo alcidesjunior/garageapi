@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   root to: 'home#index'
+  post '/auth/login', to: 'authentications#login'
   namespace :api do
     namespace :v1 do
-      post 'user_token' => 'user_token#create'
+      # post 'user_token' => 'user_token#create'
       resources :users
       get 'current_user' => 'users#current'
       resources :addresses

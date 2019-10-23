@@ -36,10 +36,8 @@ module Api
       end
 
       def update
-        puts "========"
-        puts params[:id]
-        puts "========"
-        @parking = Parking.update(params[:id],parking_params)
+
+        @parking = Parking.update(params[:id],parking_paramsß)
         render json: {result: @parking}
       end
 

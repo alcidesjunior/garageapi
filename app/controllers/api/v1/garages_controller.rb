@@ -1,7 +1,7 @@
 module Api
   module V1
     class GaragesController < ApplicationController
-      before_action :authenticate_user, only: [:update, :logout]
+      before_action :authorize_request, except: [:index, :show]
       before_action :set_garage, only:[:show,:update,:destroy]
 
       def index
