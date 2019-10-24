@@ -30,16 +30,6 @@ module Api
         puts garage
         garage = garage.as_json(:only=>["id","price","lat","long","parking_spaces","busy_space","average"])
         puts "================== #{garage}"
-         # if garage["comments"] != nil
-           # garage["comments"].each do |c|
-           #   _acumulateRate += c["rating"]
-           # end
-           # if _acumulateRate > 0
-           #   garage[:average] = ((_acumulateRate/garage["comments"].count).to_f).round(2)
-           # end
-           # _acumulateRate = 0
-         # end
-
         # @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
         render json: {results: garage}
 
@@ -55,6 +45,8 @@ module Api
            end
            if _acumulateRate > 0
              garage[:average] = ((_acumulateRate/garage["comments"].count).to_f).round(2)
+           else
+             current_garage[:average] = nil
            end
            _acumulateRate = 0
          else
