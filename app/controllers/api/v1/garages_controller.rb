@@ -57,6 +57,8 @@ module Api
              garage[:average] = ((_acumulateRate/garage["comments"].count).to_f).round(2)
            end
            _acumulateRate = 0
+         else
+           current_garage["average"] = nil
          end
 
         render json: {result: garage}
