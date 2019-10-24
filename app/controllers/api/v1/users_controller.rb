@@ -16,7 +16,7 @@ module Api
         #   puts "xiiiiiii"
         # end
         if @current_user.role == "ROLE_GD"
-          render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}#, garages: @garages}#, address: @user_address, garages: @garages}
+          render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest,:garage_id])}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
           render json: {result: @current_user.as_json(:include => [:addresses],:except =>[:password_digest])}
         end
@@ -39,7 +39,15 @@ module Api
         # end
 
         if @user.role == "ROLE_GD"
-          render json: {result: @user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}#, garages: @garages}#, address: @user_address, garages: @garages}
+          puts "===================== motorista"
+          user_data = @user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])
+          # user_data.each{|param|
+          #   param[:addresses].each{|address|
+          #     puts address
+          #   }
+          # }
+
+          render json: {result: user_data}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
           render json: {result: @user.as_json(:include => [:addresses],:except =>[:password_digest])}
         end
@@ -47,7 +55,7 @@ module Api
 
       def user_parkings
         if @current_user.role == "ROLE_GD"
-          render json: {result: @current_user.as_json(:include => [:addresses,:vehicle,:parking],:except =>[:password_digest])}
+          render json: {result: @current_user.as_json(:include => [:addresses,:vehicle,:parking],:except =>[:password_digest,:garage_id])}
         else
           render json: {notice: "This is not a driver"}
         end

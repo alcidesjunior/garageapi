@@ -18,7 +18,6 @@ module Api
             render json: {result: parking}
           elsif _filter == "all"
             parking = Parking.where(:user_id=> @current_user.id)
-            
             render json: {results: parking}
           end
         else

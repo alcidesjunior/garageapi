@@ -15,11 +15,14 @@ module Api
 
       def create
         @address = Address.new(address_params)
-
-        if @address.save
-          render json: {result: @address}
+        if User.find_by(id: address_params["user_id"])
+          if @address.save
+            render json: {result: @address}
+          else
+            render json: {result: @address.errors.full_messages}
+          end
         else
-          render json: {result: @address.errors}
+          render json: {notice: "Please, insert an existing User."}
         end
       end
 

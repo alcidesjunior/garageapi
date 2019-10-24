@@ -10,6 +10,15 @@ module Api
         render json: {results: @comments}
       end
 
+      def create
+        @comment = Comment.new(comments_params)
+        if @comment.save
+          render json: {result: @comment}
+        else
+          render json: {notice: @comment.errors.full_messages}
+        end
+      end
+
       def show
       end
 
@@ -22,7 +31,7 @@ module Api
       private
 
         def comments_params
-          params.require(:comments).permit(:from_user_id,:to_user_id,:garage_id,:title,:message,:rating)
+          params.permit(:from_user_id,:to_user_id,:garage_id,:title,:message,:rating)
         end
 
         def set_comment
