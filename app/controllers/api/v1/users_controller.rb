@@ -41,11 +41,11 @@ module Api
         if @user.role == "ROLE_GD"
           puts "===================== motorista"
           user_data = @user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])
-          user_data.each{|param|
-            param[:addresses].each{|address|
-              puts address
-            }
-          }
+          # user_data.each{|param|
+          #   param[:addresses].each{|address|
+          #     puts address
+          #   }
+          # }
 
           render json: {result: user_data}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
