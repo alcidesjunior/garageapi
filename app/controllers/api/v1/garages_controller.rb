@@ -8,26 +8,28 @@ module Api
 
         garage = Garage.all.as_json(:include=> [:address,:comments])
         _acumulateRate = 0
-
-        garage.each do |current_garage|
-          current_garage["lat"] = current_garage["address"]["lat"]
-          current_garage["long"] = current_garage["address"]["long"]
-          # current_garage
-          # puts "===========> #{current_garage["comments"].class} <"
-          if current_garage["comments"].count != 0
-            # current_garage["comments"].each do |current_comment,val|
-            #   _acumulateRate += current_comment["rating"]
-            # end
-            # if _acumulateRate > 0
-            #   current_garage["average"] = ((_acumulateRate/current_garage["comments"].count).to_f).round(2)
-            # else
-            #   current_garage["average"] = nil
-            # end
-            # _acumulateRate = 0
-          else
-            current_garage["average"] = nil
-          end
-        end
+        puts "=============="
+        puts garage
+        puts "=============="
+        # garage.each do |current_garage|
+        #   current_garage["lat"] = current_garage["address"]["lat"]
+        #   current_garage["long"] = current_garage["address"]["long"]
+        #   # current_garage
+        #   # puts "===========> #{current_garage["comments"].class} <"
+        #   if current_garage["comments"].count != 0
+        #     current_garage["comments"].each do |current_comment,val|
+        #       _acumulateRate += current_comment["rating"]
+        #     end
+        #     if _acumulateRate > 0
+        #       current_garage["average"] = ((_acumulateRate/current_garage["comments"].count).to_f).round(2)
+        #     else
+        #       current_garage["average"] = nil
+        #     end
+        #     _acumulateRate = 0
+        #   else
+        #     current_garage["average"] = nil
+        #   end
+        # end
         # puts garage
         garage = garage.as_json(:only=>["id","price","lat","long","parking_spaces","busy_space","average"])
         # puts "================== #{garage}"
