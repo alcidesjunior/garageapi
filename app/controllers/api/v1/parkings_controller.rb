@@ -17,7 +17,7 @@ module Api
             parking = Parking.find_by(:driver_id=> @current_user.id, :end=>nil)
             render json: {result: parking.as_json(:except=>[:user_id])}
           elsif _filter == "all"
-            parking = Parking.where(:user_id=> @current_user.id)
+            parking = Parking.where(:driver_id=> @current_user.id)
             render json: {results: parking}
           end
         else

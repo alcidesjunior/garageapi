@@ -6,8 +6,38 @@ module Api
 
       def index
 
-        @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
-        render json: {results: @garages}
+        garage = Garage.all.as_json(:include=> [:address,:comments])
+        _acumulateRate = 0
+
+        garage.each do |current_garage|
+          # current_garage
+          # puts "=>>>>>>>>>>>#{current_garage["comments"]}"
+          # puts "===========> #{current_garage["comments"].class} <"
+          if current_garage["comments"].count != 0
+            current_garage["comments"].each do |current_comment,val|
+              _acumulateRate += current_comment["rating"]
+            end
+            if _acumulateRate > 0
+              current_garage["average"] = ((_acumulateRate/current_garage["comments"].count).to_f).round(2)
+            end
+            _acumulateRate = 0
+          end
+        end
+        puts garage
+        garage = garage.as_json(:only=>["id","price","lat","long","parking_spaces","busy_space","average"])
+        puts "================== #{garage}"
+         # if garage["comments"] != nil
+           # garage["comments"].each do |c|
+           #   _acumulateRate += c["rating"]
+           # end
+           # if _acumulateRate > 0
+           #   garage[:average] = ((_acumulateRate/garage["comments"].count).to_f).round(2)
+           # end
+           # _acumulateRate = 0
+         # end
+
+        # @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
+        render json: {results: garage}
 
       end
 

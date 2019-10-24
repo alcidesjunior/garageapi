@@ -9,9 +9,9 @@ module Api
       def create
         vehicle = Vehicle.new(vehicle_params)
         if vehicle.save
-          render json: {result: 'Vehicle was created!'}
+          render json: {result: vehicle}
         else
-          render json: {result: "Error when try add vehicle"}
+          render json: {result: vehicle.error.full_messages}
         end
       end
 

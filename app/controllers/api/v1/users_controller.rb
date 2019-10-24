@@ -18,7 +18,7 @@ module Api
         if @current_user.role == "ROLE_GD"
           render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest,:garage_id])}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
-          render json: {result: @current_user.as_json(:include => [:addresses],:except =>[:password_digest])}
+          render json: {result: @current_user.as_json(:include => [:addresses,:garages],:except =>[:password_digest])}
         end
         # render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}
       end
