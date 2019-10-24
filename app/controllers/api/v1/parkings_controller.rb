@@ -31,7 +31,9 @@ module Api
           if garage =  Garage.find_by_id(parking_params["garage_id"])
             #ensuring you have a vacancy available
             if garage.busy_space < garage.parking_spaces
+              parking_params["user_id"] = parking_params["driver_id"]
               @parking = Parking.new(parking_params)
+
               if @parking.save
                 garage.busy_space = garage.busy_space + 1
                 garage.save
