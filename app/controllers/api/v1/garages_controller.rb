@@ -6,11 +6,11 @@ module Api
 
       def index
 
-        garage = Garage.all.as_json(:include=> [:address,:comments])
-        _acumulateRate = 0
-        puts "=============="
-        puts garage
-        puts "=============="
+        # garage = Garage.all.as_json(:include=> [:address,:comments])
+        # _acumulateRate = 0
+        # puts "=============="
+        # puts garage
+        # puts "=============="
         # garage.each do |current_garage|
         #   current_garage["lat"] = current_garage["address"]["lat"]
         #   current_garage["long"] = current_garage["address"]["long"]
@@ -31,10 +31,10 @@ module Api
         #   end
         # end
         # puts garage
-        garage = garage.as_json(:only=>["id","price","lat","long","parking_spaces","busy_space","average"])
+        # garage = garage.as_json(:only=>["id","price","lat","long","parking_spaces","busy_space","average"])
         # puts "================== #{garage}"
-        # @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
-        render json: {results: garage}
+        @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
+        render json: {results: @garages}
 
       end
 
