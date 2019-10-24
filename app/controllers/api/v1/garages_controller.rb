@@ -10,8 +10,10 @@ module Api
         _acumulateRate = 0
 
         garage.each do |current_garage|
+          current_garage["lat"] = current_garage["address"]["lat"]
+          current_garage["long"] = current_garage["address"]["long"]
           # current_garage
-          # puts "=>>>>>>>>>>>#{current_garage["comments"]}"
+          puts "=>>>>>>>>>>>#{current_garage[:lat]}"
           # puts "===========> #{current_garage["comments"].class} <"
           if current_garage["comments"].count != 0
             current_garage["comments"].each do |current_comment,val|
@@ -27,7 +29,7 @@ module Api
             current_garage["average"] = nil
           end
         end
-        puts garage
+        # puts garage
         garage = garage.as_json(:only=>["id","price","lat","long","parking_spaces","busy_space","average"])
         puts "================== #{garage}"
         # @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
