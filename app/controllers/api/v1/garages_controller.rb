@@ -58,7 +58,7 @@ module Api
            end
            _acumulateRate = 0
          else
-           current_garage["average"] = nil
+           current_garage[:average] = nil
          end
 
         render json: {result: garage}
