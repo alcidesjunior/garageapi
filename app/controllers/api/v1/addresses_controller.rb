@@ -19,7 +19,7 @@ module Api
           if @address.save
             render json: {result: @address}
           else
-            render json: {result: @address.errors.full_messages}
+            render json: {notice: @address.errors.full_messages}
           end
         else
           render json: {notice: "Please, insert an existing User."}
@@ -27,14 +27,17 @@ module Api
       end
 
       def update
-        @address = Address.update(params[:id], address_params)#Address.find(params[:id])
-        @address.save
-        render json: {result: @address, status: :updated, notice: 'Address was updated with successfully.'}
+        if @address = Address.update(params[:id], address_params)
+          render json: {result: @address}
+        else
+          render json: {notice: @address.error.full_messages}
+        end
       end
 
       def destroy
-        @address.destroy
-        render json: {result: 'Adress was deleted with successfully.'}
+        #implementar para alterar o status de isActive para false, significando que nao será mais listado.
+        # @address.destroy
+        # render json: {result: 'Adress was deleted with successfully.'}
       end
 
       private

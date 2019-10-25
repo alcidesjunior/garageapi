@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_144414) do
+ActiveRecord::Schema.define(version: 2019_10_25_134237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_144414) do
     t.bigint "garage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "isActive", default: true
     t.index ["garage_id"], name: "index_addresses_on_garage_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
