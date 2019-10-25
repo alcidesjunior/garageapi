@@ -11,7 +11,7 @@ module Api
         if vehicle.save
           render json: {result: vehicle}
         else
-          render json: {result: vehicle.error.full_messages}
+          render json: {notice: vehicle.error.full_messages}
         end
       end
 

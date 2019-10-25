@@ -5,7 +5,7 @@ module Api
       before_action :set_address , only: [:show, :update, :destroy]
 
       def index
-        @addresses = Address.all
+        @addresses = Address.where(:isActive=>true)
         render json: {results: @addresses}
       end
 
@@ -47,7 +47,7 @@ module Api
         end
 
         def address_params
-          params.require(:address).permit(:zip, :street, :number,:city,:uf,:complement,:user_id,:garage_id,:lat,:long)
+          params.require(:address).permit(:zip, :street, :number,:city,:uf,:complement,:user_id,:garage_id,:lat,:long,:isActive)
         end
     end
   end

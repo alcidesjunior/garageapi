@@ -7,7 +7,6 @@ module Api
       def index
         @garages = Garage.all.select(:id,:price,:lat,:long,:parking_spaces,:busy_space).joins([:address])
         render json: {results: @garages}
-
       end
 
       def show
@@ -42,7 +41,7 @@ module Api
           address.save
           render json: {result: @garage}
         else
-          render json:  {result: @garage.errors, status: :unprocessable_entity}
+          render json:  {notice: @garage.errors}
         end
       end
 
@@ -53,8 +52,9 @@ module Api
       end
 
       def destroy
-        @garage.destroy
-        render json: {result: 'Garage was deleted with successfully.'}
+        #implementar isActive e setar para false
+        # @garage.destroy
+        # render json: {result: 'Garage was deleted with successfully.'}
       end
 
       private

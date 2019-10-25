@@ -11,16 +11,11 @@ module Api
       end
 
       def current
-        # current_user.update!(last_login: Time.now)
-        # if !@current_user
-        #   puts "xiiiiiii"
-        # end
         if @current_user.role == "ROLE_GD"
           render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest,:garage_id])}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
           render json: {result: @current_user.as_json(:include => [:addresses,:garages],:except =>[:password_digest])}
         end
-        # render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])}
       end
 
       def show
@@ -39,13 +34,7 @@ module Api
         # end
 
         if @user.role == "ROLE_GD"
-          puts "===================== motorista"
-          user_data = @user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest])
-          # user_data.each{|param|
-          #   param[:addresses].each{|address|
-          #     puts address
-          #   }
-          # }
+          user_data = @user.as_json(:include => [:addresses,:vehicle,:parking],:except =>[:password_digest,:garage_id])
 
           render json: {result: user_data}#, garages: @garages}#, address: @user_address, garages: @garages}
         else
@@ -66,7 +55,7 @@ module Api
         if user.save
           render json: {result: user.as_json(:except =>[:password_digest])}
         else
-          render json: {result: "Error when try add user"}
+          render json: {notice: "Error when try add user"}
         end
       end
       def update

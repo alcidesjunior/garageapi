@@ -25,9 +25,6 @@ module Api
         end
       end
       def create
-        puts "================="
-        puts parking_params["garage_id"]
-        puts "-================"
           if garage =  Garage.find_by_id(parking_params["garage_id"])
             #ensuring you have a vacancy available
             if garage.busy_space < garage.parking_spaces
@@ -39,13 +36,13 @@ module Api
                 garage.save
                 render json: { result: @parking.as_json(:except =>[:user_id])}
               else
-                render json:  {result: @parking.errors}
+                render json:  {notice: @parking.errors}
               end
             else
-              render json: {notice: "Sorry, no vacancies."}
+              render json: {notice: "Sorry, no vacancies"}
             end
           else
-            render json: {notice: "Error when try parking: Garage not found."}
+            render json: {notice: "Error when try parking: Garage not found"}
           end
       end
 
@@ -53,7 +50,7 @@ module Api
         if @parking
           render json: {result: @parking.as_json(:except =>[:user_id])}
         else
-          render json: {result: "Parking was not found."}
+          render json: {notice: "Parking was not found."}
         end
       end
 
@@ -76,7 +73,7 @@ module Api
 
         def set_parking
           unless @parking = Parking.find_by_id(params[:id])
-            render json: {error: "Parking not found"}
+            render json: {notice: "Parking not found"}
           end
         end
     end
