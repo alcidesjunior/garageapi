@@ -58,9 +58,15 @@ module Api
           render json: {notice: "Error when try add user"}
         end
       end
+
       def update
-        puts "=======chamando"
+        if user = User.update(params[:id],user_params)
+          render json: {result: user}
+        else
+          render json: {notice: user.error.full_messages}
+        end
       end
+      
       private
 
       def user_params
