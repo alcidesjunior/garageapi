@@ -64,7 +64,7 @@ module Api
       private
 
       def user_params
-        params.permit(:name,:email,:document_type,:document_number,:password,:role,:busy_space, :isActive, :lat, :long)
+        params.permit(:name,:email,:document_type,:document_number,:password,:role,:busy_space, :isActive, :lat, :long,:avatar)
       end
 
       def set_user
