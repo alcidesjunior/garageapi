@@ -15,6 +15,14 @@ module Api
         end
       end
 
+      def update
+        if vehicle = Vehicle.update(params[:id],vehicle_params)
+          render json: {result: vehicle}
+        else
+          render json: {notice: vehicle.error.full_messages}
+        end
+      end
+
       private
       def vehicle_params
         params.permit(:model,:chassi,:license_plate,:year, :driver_license, :user_id)

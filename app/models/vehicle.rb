@@ -4,4 +4,5 @@ class Vehicle < ApplicationRecord
 
   validates :chassi, presence: true, uniqueness: true
   validates :license_plate, presence: true, uniqueness: true
+  validates :user_id, presence: true
 end
