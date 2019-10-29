@@ -60,7 +60,7 @@ module Api
       private
 
       def garage_params
-        params.require(:garage).permit(:description, :parking_spaces, :price,
+        params.permit(:description, :parking_spaces, :price,
         :photo1,:photo2,:photo3,:address_id,:user_id)
       end
 
