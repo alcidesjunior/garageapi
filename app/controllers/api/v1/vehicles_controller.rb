@@ -17,7 +17,7 @@ module Api
 
       private
       def vehicle_params
-        params.require(:vehicle).permit(:model,:chassi,:license_plate,:year, :driver_license, :user_id)
+        params.permit(:model,:chassi,:license_plate,:year, :driver_license, :user_id)
       end
 
       def set_vehicle
