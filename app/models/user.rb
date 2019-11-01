@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :document_number, presence: false, uniqueness: true
+  # validates :document_number, presence: false, uniqueness: true
 
   has_many :addresses
   has_many :garages
