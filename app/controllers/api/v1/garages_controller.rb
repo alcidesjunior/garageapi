@@ -37,9 +37,10 @@ module Api
 
       def create
         address_id = garage_params["address_id"]
-        @garage = Garage.new(garage_params)#.except(:address_id))
-
+        @garage = Garage.new(garage_params.except(:address_id))
+        puts ">>>>>>>>>>#{address_id}"
         if @garage.save
+          #eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE1NzYwNzU5NjV9.PgWfEEoePy1cfrNm-4MZTqFj5-YhZHDHgjrfHxTH_rI
           #associating garage to address
           # address = Address.find_by(id: address_id)
           if address = Address.find_by(id: address_id)
