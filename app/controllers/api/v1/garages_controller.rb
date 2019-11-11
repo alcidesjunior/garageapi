@@ -41,10 +41,16 @@ module Api
 
         if @garage.save
           #associating garage to address
-          address = Address.find(address_id)
-          address.garage_id = @garage.id
-          address.save
-          render json: {result: @garage}
+          # address = Address.find_by(id: address_id)
+          if address = Address.find_by(id: address_id)
+            address.garage_id = @garage.id
+            address.save
+            response.status = 201
+            render json: {result: @garage}
+          else
+            response.status = 404
+            render json: {notice: "Address not found."}
+          end
         else
           render json:  {notice: @garage.errors.full_messages}
         end

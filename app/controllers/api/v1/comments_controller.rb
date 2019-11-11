@@ -11,11 +11,11 @@ module Api
       end
 
       def create
-        @comment = Comment.new(comments_params)
-        if @comment.save
-          render json: {result: @comment}
+        comment = Comment.new(comments_params)
+        if comment.save
+          render json: {result: comment}
         else
-          render json: {notice: @comment.errors.full_messages}
+          render json: {notice: comment.errors.full_messages}
         end
       end
 
