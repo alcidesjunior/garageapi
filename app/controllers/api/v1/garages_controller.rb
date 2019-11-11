@@ -46,7 +46,7 @@ module Api
           address.save
           render json: {result: @garage}
         else
-          render json:  {notice: @garage.errors}
+          render json:  {notice: @garage.errors.full_messages}
         end
       end
 
