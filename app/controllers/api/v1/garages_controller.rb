@@ -9,6 +9,11 @@ module Api
         render json: {results: @garages}
       end
 
+      def garageByUserId
+        garages = Garage.where(:user_id=>params[:user_id])
+        render json: {results: garages}
+      end
+
       def show
         garage = @garage.as_json(:include=> [:address,:comments])
         _acumulateRate = 0
