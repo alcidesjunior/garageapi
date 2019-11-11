@@ -45,7 +45,8 @@ module Api
           #eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE1NzYwNzU5NjV9.PgWfEEoePy1cfrNm-4MZTqFj5-YhZHDHgjrfHxTH_rI
           #associating garage to address
           # address = Address.find_by(id: address_id)
-          if address = Address.find_by(id: address_id)
+          if Address.exists?(address_id)
+            address = Address.find_by(id: address_id)
             address.garage_id = @garage.id
             address.save
             response.status = 201
