@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
   post '/auth/login', to: 'authentications#login'
+  mount ActionCable.server => '/cable'
   namespace :api do
     namespace :v1 do
       # post 'user_token' => 'user_token#create'
