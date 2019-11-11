@@ -68,7 +68,7 @@ module Api
 
       private
         def parking_params
-          params.permit(:garage_owner_id,:driver_id,:price,:license_plate,:start,:end,:user_id,:vehicle_id,:garage_id)
+          params.permit(:garage_owner_id,:driver_id,:price,:license_plate,:start,:end,:user_id,:vehicle_id,:garage_id,:permanence_duration,:price_per_hour)
         end
 
         def set_parking

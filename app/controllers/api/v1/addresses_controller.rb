@@ -47,7 +47,7 @@ module Api
         end
 
         def address_params
-          params.require(:address).permit(:zip, :street, :number,:city,:uf,:complement,:user_id,:garage_id,:lat,:long,:isActive)
+          params.permit(:zip, :street, :number,:city,:uf,:complement,:user_id,:garage_id,:lat,:long,:isActive)
         end
     end
   end
