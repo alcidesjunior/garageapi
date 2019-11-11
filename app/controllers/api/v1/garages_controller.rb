@@ -40,12 +40,13 @@ module Api
         @garage = Garage.new(garage_params.except(:address_id))
         puts ">>>>>>>>>>#{address_id}"
 
-        if @garage.save
-          puts ">>>>>>>>#{@garage.id}<<<<<<<<"
+        # if @garage.save
+          # puts ">>>>>>>>#{@garage.id}<<<<<<<<"
           #eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE1NzYwNzU5NjV9.PgWfEEoePy1cfrNm-4MZTqFj5-YhZHDHgjrfHxTH_rI
           #associating garage to address
           # address = Address.find_by(id: address_id)
           if Address.exists?(address_id)
+            @garage.save
             address = Address.find_by(id: address_id)
             address.garage_id = @garage.id
             address.save
@@ -55,9 +56,9 @@ module Api
             response.status = 404
             render json: {notice: "Address not found."}
           end
-        else
-          render json:  {notice: @garage.errors.full_messages}
-        end
+        # else
+        #   render json:  {notice: @garage.errors.full_messages}
+        # end
       end
 
       def update
