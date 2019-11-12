@@ -11,7 +11,7 @@ module Api
 
       def garageByUserId
         garages = Garage.where(:user_id=>params[:user_id])
-        render json: {results: garages}
+        render json: {results: garages.as_json(:include=> [:address,:comments])}
       end
 
       def show
