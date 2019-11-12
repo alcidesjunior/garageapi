@@ -10,7 +10,7 @@ module Api
       end
 
       def garageByUserId
-        garages = Garage.where(:user_id=>params[:id],:role=>"ROLE_GO")
+        garages = Garage.where(:user_id=>params[:id])
         garages = garages.as_json(:include=> [:address,:comments,:parking])
         # garages = garages.each {|e|
         #   if e["parking"] != nil
