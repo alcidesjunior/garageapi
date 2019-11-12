@@ -15,7 +15,7 @@ module Api
         garages = garages.each {|e|
           if e["parking"] != nil
             #removendo garagens que não estão em aberto
-            garages.delete(e) if e["parking"]["end"] != nil
+            garages.delete(e) if e["parking"]["end"].nil?
           end
         }
         render json: {results: garages}
