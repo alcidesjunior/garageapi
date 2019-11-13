@@ -10,12 +10,12 @@ module Api
       end
 
       def garageByUserId
-        garages = Garage.where(:user_id=>params[:id])
-        garages = garages.as_json(:include=> [:address,:comments,:parking])
-        # garages = garages.each {|e|
+        garages = Garage.find_by(:user_id=>params[:id])
+        garages = garages.as_json(:include=> [:address,:parkings])
+        # garages = garages["parkings"].each {|e|
         #   if e["parking"] != nil
         #     #removendo garagens que não estão em aberto
-        #     garages.delete(e) if e["parking"]["end"].nil?
+        #     garages.delete(e["parking"]) if e["parking"][:end].nil?
         #   end
         # }
         render json: {results: garages}

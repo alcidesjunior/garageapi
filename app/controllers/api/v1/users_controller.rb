@@ -11,10 +11,14 @@ module Api
       end
 
       def current
-        if @current_user.role == "ROLE_GD"
-          render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest,:garage_id])}#, garages: @garages}#, address: @user_address, garages: @garages}
+        if !@current_user.nil?
+          if @current_user.role == "ROLE_GD"
+            render json: {result: @current_user.as_json(:include => [:addresses,:vehicle],:except =>[:password_digest,:garage_id])}#, garages: @garages}#, address: @user_address, garages: @garages}
+          else
+            render json: {result: @current_user.as_json(:include => [:addresses,:garages],:except =>[:password_digest])}
+          end
         else
-          render json: {result: @current_user.as_json(:include => [:addresses,:garages],:except =>[:password_digest])}
+          render json: {notice: "User invalid or token was expired!"}
         end
       end
 
@@ -66,7 +70,7 @@ module Api
           render json: {notice: user.error.full_messages}
         end
       end
-      
+
       private
 
       def user_params
