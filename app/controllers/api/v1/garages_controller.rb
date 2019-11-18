@@ -47,11 +47,6 @@ module Api
         @garage = Garage.new(garage_params.except(:address_id))
         puts ">>>>>>>>>>#{address_id}"
 
-        # if @garage.save
-          # puts ">>>>>>>>#{@garage.id}<<<<<<<<"
-          #eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJleHAiOjE1NzYwNzU5NjV9.PgWfEEoePy1cfrNm-4MZTqFj5-YhZHDHgjrfHxTH_rI
-          #associating garage to address
-          # address = Address.find_by(id: address_id)
           if Address.exists?(address_id)
             @garage.save
             address = Address.find_by(id: address_id)
