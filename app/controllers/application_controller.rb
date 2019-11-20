@@ -18,18 +18,4 @@ class ApplicationController < ActionController::API
       render json: { result: "Token invalid." }, status: :unauthorized
     end
   end
-
-  # def current_user
-  #   header = request.headers['Authorization']
-  #   header = header.split(' ').last if header
-  #
-  #
-  #   begin
-  #     @decoded = JsonWebToken.decode(header)
-  #     @current_user = User.find_by_id(@decoded[:user_id])
-  #     return @current_user
-  #   rescue
-  #     render json: {result: "Unauthorized"}
-  #   end
-  # end
 end
