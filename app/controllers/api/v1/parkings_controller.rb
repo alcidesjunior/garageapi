@@ -38,7 +38,7 @@ module Api
                 notification = OneSignal::Notification.create(params:{
                   app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc",
                   contents:{
-                    en:"#{User.find_by(id: parking_params["user_id"]).name} deseja estacionar"
+                    en:"#{User.find_by(id: parking_params["driver_id"]).name} deseja estacionar"
 
                   },
                   ios_category:"PARKING_INVITATION",
