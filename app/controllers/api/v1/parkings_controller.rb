@@ -24,6 +24,7 @@ module Api
           render json: {notice: "This is not a driver"}
         end
       end
+      
       def create
           if garage =  Garage.find_by_id(parking_params["garage_id"])
             #ensuring you have a vacancy available
@@ -35,25 +36,7 @@ module Api
                 players = OneSignal::Player.all(params:{app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc"})
                 player_id = JSON.parse(players.body)["players"][2]
 
-                notification = OneSignal::Notification.create(params:{
-                  app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc",
-                  contents:{
-                    en:"#{User.find_by(id: parking_params["driver_id"]).name} deseja estacionar"
 
-                  },
-                  ios_category:"PARKING_INVITATION",
-                  buttons:[{id:"1",text:"Acept",icon:"some"},{id:"2",text:"Reject",icon:"some"}],
-                  include_player_ids:[player_id["id"].to_s],
-                  action: "like-btn",
-                  content_available:true,
-                  data:{
-                    name: "Alcides",
-                    idade: 25
-                  }
-                })
-                render json: {
-                  result: "Notication was sended #{player_id['id']}"
-                }
                 garage.busy_space = garage.busy_space + 1
                 garage.save
                 render json: { result: @parking.as_json(:except =>[:user_id])}
