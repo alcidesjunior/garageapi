@@ -24,7 +24,7 @@ module Api
           render json: {notice: "This is not a driver"}
         end
       end
-      
+
       def create
           if garage =  Garage.find_by_id(parking_params["garage_id"])
             #ensuring you have a vacancy available
@@ -33,10 +33,12 @@ module Api
               @parking = Parking.new(parking_params)
 
               if @parking.save
-                players = OneSignal::Player.all(params:{app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc"})
-                player_id = JSON.parse(players.body)["players"][2]
+                # players = OneSignal::Player.all(params:{app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc"})
+                # player_id = JSON.parse(players.body)["players"][2]
 
-
+                                    #app_id,user_auth,api_key
+                noty = Notification("d5d9db25-332e-4f14-9dd2-1feec0fbf3cc","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh")
+                noty.toGarage()
                 garage.busy_space = garage.busy_space + 1
                 garage.save
                 render json: { result: @parking.as_json(:except =>[:user_id])}

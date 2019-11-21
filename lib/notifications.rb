@@ -16,14 +16,27 @@ class Notifications
       },
       ios_category:"PARKING_INVITATION",
       buttons:[{id:"1",text:"Acept",icon:"some"},{id:"2",text:"Reject",icon:"some"}],
-      include_player_ids:[player_id["id"].to_s],
+      include_player_ids:[_user.player_id],
       action: "like-btn",
       content_available:true,
-      data:{
-      }
+      data:{}
     })
-    # render json: {
-    #   result: "Notication was sended #{player_id['id']}"
-    # }
+  end
+
+  def toDriver(user_id, message)
+    _user = User.find_by(user_id)
+
+    notification = OneSignal::Notification.create(params:{
+      app_id: self.app_id,
+      contents:{
+        en:"#{message}"
+      },
+      ios_category:"PARKING_INVITATION",
+      buttons:[{id:"1",text:"Acept",icon:"some"},{id:"2",text:"Reject",icon:"some"}],
+      include_player_ids:[_user.player_id],
+      action: "like-btn",
+      content_available:true,
+      data:{}
+    })
   end
 end

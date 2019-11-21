@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   @current_user = ""
-  OneSignal::OneSignal.user_auth_key = "ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz"
-  OneSignal::OneSignal.api_key = "NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh"
+  # OneSignal::OneSignal.user_auth_key = "ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz"
+  # OneSignal::OneSignal.api_key = "NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh"
   def not_found
     render json: { error: 'not_found' }
   end
