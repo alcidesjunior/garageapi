@@ -33,12 +33,9 @@ module Api
               @parking = Parking.new(parking_params)
 
               if @parking.save
-                # players = OneSignal::Player.all(params:{app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc"})
-                # player_id = JSON.parse(players.body)["players"][2]
-
-                                    #app_id,user_auth,api_key
+                #app_id,user_auth,api_key
                 noty = Notification("d5d9db25-332e-4f14-9dd2-1feec0fbf3cc","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh")
-                noty.toGarage()
+                noty.toGarage(garage.user_id)
                 garage.busy_space = garage.busy_space + 1
                 garage.save
                 render json: { result: @parking.as_json(:except =>[:user_id])}
@@ -100,7 +97,7 @@ module Api
           puts "======="
           puts params[:parking]
           puts "======="
-          params.permit(:garage_owner_id,:driver_id,:price,:license_plate,:start,:end,:user_id,:vehicle_id,:garage_id,:permanence_duration,:price_per_hour)
+          params.permit(:garage_owner_id,:driver_id,:price,:license_plate,:start,:end,:user_id,:vehicle_id,:garage_id,:permanence_duration,:price_per_hour,:status)
         end
 
         def set_parking
