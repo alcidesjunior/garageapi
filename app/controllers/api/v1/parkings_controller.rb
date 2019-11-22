@@ -36,8 +36,8 @@ module Api
                 #app_id,user_auth,api_key
                 noty = Notification("d5d9db25-332e-4f14-9dd2-1feec0fbf3cc","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh")
                 noty.toGarage(garage.user_id)
-                garage.busy_space = garage.busy_space + 1
-                garage.save
+                # garage.busy_space = garage.busy_space + 1
+                # garage.save
                 render json: { result: @parking.as_json(:except =>[:user_id])}
               else
                 render json:  {notice: @parking.errors}
@@ -62,31 +62,51 @@ module Api
 
         @parking = Parking.update(params[:id],parking_params)
         garage = Garage.find_by(:id=>@parking.garage_id)
-        if garage.busy_space > 0
-          players = OneSignal::Player.all(params:{app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc"})
-          player_id = JSON.parse(players.body)["players"][2]
+        # if garage.busy_space > 0
+           if parking_params[:status] != nil
+             noty = Notification("75ad7e1f-f43a-4382-ada0-50553d07b475","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","ZThjNjM4OTAtYTcwNi00ZTY4LTg1ZDQtYzQ4NzU2MGRkMDgy")
+             if parking_params[:status] == true
+               garage.busy_space = garage.busy_space + 1
+               garage.save
+               # 75ad7e1f-f43a-4382-ada0-50553d07b475 app id
+               # ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz user auth
+               # ZThjNjM4OTAtYTcwNi00ZTY4LTg1ZDQtYzQ4NzU2MGRkMDgy api key
+               #dono de garagem aceitou o estacionamento push para o motorista
+               #instanciar a classe de push e mandar para o motorista
+               noty.toDriver(@parking.driver_id, "Pode se dirigir a garagem.")
+             else
+               #dono de garagem rejeitou o estacionamento mandar apenas a push
+               #para o motorista
+               noty.toDriver(@parking.driver_id, "Ops! a garagem não aceitou sua solicitação.")
+               #instanciar a classe de notification e mandar push pro motorista
+             end
+           else
+             #concluindo estacionamento
+             garage.busy_space = (garage.busy_space - 1)
+             garage.save
+           end
 
-          notification = OneSignal::Notification.create(params:{
-            app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc",
-            contents:{
-              en:"Se eu tivesse passado vcs nao teria passado - Oliveira, Mateus"
-
-            },
-            ios_category:"PARKING_INVITATION",
-            buttons:[{id:"1",text:"Acept",icon:"some"},{id:"2",text:"Reject",icon:"some"}],
-            include_player_ids:[player_id["id"].to_s],
-            action: "like-btn",
-            content_available:true,
-            data:{
-              name: "Alcides",
-              idade: 25
-            }
-          })
-          render json: {
-            result: "Notication was sended #{player_id['id']}"
-          }
-          garage.busy_space = (garage.busy_space - 1)
-          garage.save
+          # notification = OneSignal::Notification.create(params:{
+          #   app_id: "d5d9db25-332e-4f14-9dd2-1feec0fbf3cc",
+          #   contents:{
+          #     en:"Se eu tivesse passado vcs nao teria passado - Oliveira, Mateus"
+          #
+          #   },
+          #   ios_category:"PARKING_INVITATION",
+          #   buttons:[{id:"1",text:"Acept",icon:"some"},{id:"2",text:"Reject",icon:"some"}],
+          #   include_player_ids:[player_id["id"].to_s],
+          #   action: "like-btn",
+          #   content_available:true,
+          #   data:{
+          #     name: "Alcides",
+          #     idade: 25
+          #   }
+          # })
+          # render json: {
+          #   result: "Notication was sended #{player_id['id']}"
+          # }
+          # garage.busy_space = (garage.busy_space - 1)
+          # garage.save
         end
         render json: {result: @parking}
       end
