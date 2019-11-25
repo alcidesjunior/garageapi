@@ -34,7 +34,7 @@ module Api
 
               if @parking.save
                 #app_id,user_auth,api_key
-                noty = Notifications("d5d9db25-332e-4f14-9dd2-1feec0fbf3cc","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh")
+                noty = Notifications.new("d5d9db25-332e-4f14-9dd2-1feec0fbf3cc","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh")
                 noty.toGarage(garage.user_id)
                 # garage.busy_space = garage.busy_space + 1
                 # garage.save
@@ -64,7 +64,7 @@ module Api
         garage = Garage.find_by(:id=>@parking.garage_id)
         # if garage.busy_space > 0
            if parking_params[:status] != nil
-             noty = Notifications("75ad7e1f-f43a-4382-ada0-50553d07b475","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","ZThjNjM4OTAtYTcwNi00ZTY4LTg1ZDQtYzQ4NzU2MGRkMDgy")
+             noty = Notifications.new("75ad7e1f-f43a-4382-ada0-50553d07b475","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","ZThjNjM4OTAtYTcwNi00ZTY4LTg1ZDQtYzQ4NzU2MGRkMDgy")
              if parking_params[:status] == true
                garage.busy_space = garage.busy_space + 1
                garage.save
