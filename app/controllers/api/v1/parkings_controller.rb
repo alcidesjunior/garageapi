@@ -83,8 +83,10 @@ module Api
              end
            else
              #concluindo estacionamento
-             garage.busy_space = (garage.busy_space - 1)
-             garage.save
+             if garage.busy_space>0
+               garage.busy_space = (garage.busy_space - 1)
+               garage.save
+             end
            end
         # end
         render json: {result: @parking}
