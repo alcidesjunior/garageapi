@@ -77,6 +77,7 @@ module Api
              else
                #dono de garagem rejeitou o estacionamento mandar apenas a push
                #para o motorista
+               puts "========> parking id driver #{@parking.driver_id}"
                noty.toDriver(@parking.driver_id, "Ops! a garagem não aceitou sua solicitação.")
                #instanciar a classe de notification e mandar push pro motorista
              end
