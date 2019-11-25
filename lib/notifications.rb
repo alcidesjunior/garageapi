@@ -3,14 +3,14 @@ class Notifications
   def initialize(app_id,user_auth_key,api_key)
     OneSignal::OneSignal.user_auth_key = user_auth_key
     OneSignal::OneSignal.api_key = api_key
-    self.app_id = app_id
+    @app_id = app_id
   end
 
   def toGarage(user_id)
     _user = User.find_by(user_id)
 
     notification = OneSignal::Notification.create(params:{
-      app_id: self.app_id,
+      app_id: @app_id,
       contents:{
         en:"#{_user.name} deseja estacionar na sua garagem.\nDeseja permitir?"
       },
@@ -27,7 +27,7 @@ class Notifications
     _user = User.find_by(user_id)
 
     notification = OneSignal::Notification.create(params:{
-      app_id: self.app_id,
+      app_id: @app_id,
       contents:{
         en:"#{message}"
       },
