@@ -35,7 +35,7 @@ module Api
               if @parking.save
                 #app_id,user_auth,api_key
                 noty = Notifications.new("d5d9db25-332e-4f14-9dd2-1feec0fbf3cc","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh")
-                noty.toGarage(garage.user_id)
+                noty.toGarage(@parking.garage_owner_id,@parking.driver_id)
                 # garage.busy_space = garage.busy_space + 1
                 # garage.save
                 render json: { result: @parking.as_json(:except =>[:user_id])}
@@ -78,7 +78,7 @@ module Api
                #dono de garagem rejeitou o estacionamento mandar apenas a push
                #para o motorista
                puts "========> parking id driver #{@parking.driver_id.class}"
-               noty.toDriver(@parking.driver_id, "Ops! a garagem não aceitou sua solicitação.")
+               noty.toDriver(@parking.driver_id, "A garagem não aceitou sua solicitação.")
                #instanciar a classe de notification e mandar push pro motorista
              end
            else
