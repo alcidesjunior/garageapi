@@ -33,11 +33,9 @@ module Api
               @parking = Parking.new(parking_params)
 
               if @parking.save
-                #app_id,user_auth,api_key
+                #Params app_id,user_auth,api_key
                 noty = Notifications.new("d5d9db25-332e-4f14-9dd2-1feec0fbf3cc","ZTQ5YzYyYzEtZmJkMi00ZGM4LWE3M2YtNWVhMjY0YTc2OWMz","NTAzNTYyMDUtOTJhMi00MjlkLWIzZDUtZmM0YmQ4ZDIxYWVh")
-                noty.toGarage(@parking.garage_owner_id,@parking.driver_id)
-                # garage.busy_space = garage.busy_space + 1
-                # garage.save
+                noty.toGarage(@parking.garage_owner_id,@parking.driver_id,@parking.id)
                 render json: { result: @parking.as_json(:except =>[:user_id])}
               else
                 render json:  {notice: @parking.errors}
