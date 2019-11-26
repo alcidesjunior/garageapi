@@ -5,7 +5,7 @@ class Parking < ApplicationRecord
   validates :garage_id, presence: true
   validates :driver_id, presence: true
   validates :vehicle_id, presence: true
-  validates :start, presence: true
+  # validates :start, presence: true
 
   belongs_to :garage
 end

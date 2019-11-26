@@ -7,7 +7,7 @@ class Notifications
   end
 
   def toGarage(user_id)
-    _user = User.find_by(user_id)
+    _user = User.find_by_id(user_id)
 
     notification = OneSignal::Notification.create(params:{
       app_id: @app_id,
@@ -24,7 +24,7 @@ class Notifications
   end
 
   def toDriver(user_id, message)
-    _user = User.find_by(user_id)
+    _user = User.find_by_id(user_id)
 
     notification = OneSignal::Notification.create(params:{
       app_id: @app_id,
