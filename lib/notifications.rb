@@ -9,7 +9,7 @@ class Notifications
   def toGarage(garage_owner_id,driver_id,parkingid)
     _driver = User.find_by_id(driver_id)
     _garager = User.find_by_id(garage_owner_id)
-    puts "[#{_driver.player_id}] o proprietário do carro #{_driver.vehicle.model} de placa #{_driver.vehicle.license_plate} deseja estacionar na sua garagem.\nDeseja permitir?"
+    #puts "[#{_driver.player_id}] o proprietário do carro #{_driver.vehicle.model} de placa #{_driver.vehicle.license_plate} deseja estacionar na sua garagem.\nDeseja permitir?"
     notification = OneSignal::Notification.create(params:{
       app_id: @app_id,
       contents:{
