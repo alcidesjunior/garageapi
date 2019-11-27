@@ -14,7 +14,8 @@ module Api
         _filter = "all" if _filter.nil?
         if @current_user.role == "ROLE_GD"
           if _filter == "current"
-            parking = Parking.find_by(:driver_id=> @current_user.id, :status=> true)
+            parking = Parking.find_by(:driver_id=> @current_user.id, :status=> true, end: nil)
+            puts parking
             render json: {result: parking.as_json(:except=>[:user_id])}
           elsif _filter == "all"
             parking = Parking.where(:driver_id=> @current_user.id)
@@ -71,12 +72,12 @@ module Api
                # ZThjNjM4OTAtYTcwNi00ZTY4LTg1ZDQtYzQ4NzU2MGRkMDgy api key
                #dono de garagem aceitou o estacionamento push para o motorista
                #instanciar a classe de push e mandar para o motorista
-               noty.toDriver(@parking.driver_id, "Pode se dirigir a garagem.",true)
+               noty.toDriver(@parking.driver_id, "Pode se dirigir a garagem.",true,@parking.id)
              else
                #dono de garagem rejeitou o estacionamento mandar apenas a push
                #para o motorista
                puts "========> parking id driver #{@parking.driver_id.class}"
-               noty.toDriver(@parking.driver_id, "A garagem não aceitou sua solicitação.",false)
+               noty.toDriver(@parking.driver_id, "A garagem não aceitou sua solicitação.",false,@parking.id)
                #instanciar a classe de notification e mandar push pro motorista
              end
            else
