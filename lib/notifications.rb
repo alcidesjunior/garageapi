@@ -15,7 +15,7 @@ class Notifications
       contents:{
         en:"O proprietário do carro #{_driver.vehicle.model} de placa #{_driver.vehicle.license_plate} deseja estacionar na sua garagem.\nDeseja permitir?"
       },
-      ios_category:"PARKING_INVITATION",
+      ios_category: "PARKING_INVITATION",
       buttons:[{id:"1",text:"Acept",icon:"some"},{id:"2",text:"Reject",icon:"some"}],
       include_player_ids:[_garager.player_id],
       action: "like-btn",
