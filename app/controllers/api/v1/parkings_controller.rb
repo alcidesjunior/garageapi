@@ -71,12 +71,12 @@ module Api
                # ZThjNjM4OTAtYTcwNi00ZTY4LTg1ZDQtYzQ4NzU2MGRkMDgy api key
                #dono de garagem aceitou o estacionamento push para o motorista
                #instanciar a classe de push e mandar para o motorista
-               noty.toDriver(@parking.driver_id, "Pode se dirigir a garagem.")
+               noty.toDriver(@parking.driver_id, "Pode se dirigir a garagem.",true)
              else
                #dono de garagem rejeitou o estacionamento mandar apenas a push
                #para o motorista
                puts "========> parking id driver #{@parking.driver_id.class}"
-               noty.toDriver(@parking.driver_id, "A garagem não aceitou sua solicitação.")
+               noty.toDriver(@parking.driver_id, "A garagem não aceitou sua solicitação.",false)
                #instanciar a classe de notification e mandar push pro motorista
              end
            else

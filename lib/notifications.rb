@@ -26,7 +26,7 @@ class Notifications
     })
   end
 
-  def toDriver(user_id, message)
+  def toDriver(user_id, message, status)
     _user = User.find_by_id(user_id)
 
     notification = OneSignal::Notification.create(params:{
@@ -39,7 +39,9 @@ class Notifications
       include_player_ids:[_user.player_id],
       action: "like-btn",
       content_available:true,
-      data:{}
+      data:{
+        status: status
+      }
     })
   end
 end
