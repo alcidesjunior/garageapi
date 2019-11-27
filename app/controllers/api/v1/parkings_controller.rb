@@ -14,7 +14,7 @@ module Api
         _filter = "all" if _filter.nil?
         if @current_user.role == "ROLE_GD"
           if _filter == "current"
-            parking = Parking.find_by(:driver_id=> @current_user.id, :end=>nil)
+            parking = Parking.find_by(:driver_id=> @current_user.id, :status=> true)
             render json: {result: parking.as_json(:except=>[:user_id])}
           elsif _filter == "all"
             parking = Parking.where(:driver_id=> @current_user.id)
