@@ -11,7 +11,7 @@ module Api
         if vehicle.save
           render json: {result: vehicle}
         else
-          render json: {notice: vehicle.error.full_messages}
+          render json: {notice: vehicle.errors.full_messages}
         end
       end
 
@@ -19,7 +19,7 @@ module Api
         if vehicle = Vehicle.update(params[:id],vehicle_params)
           render json: {result: vehicle}
         else
-          render json: {notice: vehicle.error.full_messages}
+          render json: {notice: vehicle.errors.full_messages}
         end
       end
 
