@@ -1,24 +1,5 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+API criada para os seguintes objetivos:
+- Possibilitar criaçao de um banco de dados
+- Fornecer mecanismos de busca
+- Inicializar um banco de dados
+- Executar conjunto de testes
